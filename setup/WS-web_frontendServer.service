@@ -1,0 +1,14 @@
+[Unit]
+Description=RaspberryPi Weatherstation Webinterface - Frontendserver (React)
+After=network.target
+
+[Service]
+ExecStart=
+WorkingDirectory=/home/pi/rpi-weatherstation-web/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi	
+
+[Install]
+WantedBy=multi-user.target
