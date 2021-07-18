@@ -8,13 +8,13 @@
 # -
 # file      | WS-web_backendServer.py
 # project   | rpi-weatherstation-web
-# project-v | 0.1.0
+# project-v | 1.0.0 (beta)
 #
 
 # ---------------------------
 #   HTTP STATUS ERROR CODES:
 #   1xxxx = OK
-#   11xxx = CALCULATE-Error --> calculateValues()
+#   11xxx = CALCULATION-Error --> calculateValues()
 #   1x1xx = SQL-RETRIEVE-Error --> retrieveDataFromSQL()
 #   1xx1x = DATABASELIST-RETRIEVE-Error --> retrieveSQLDatabaseList()
 #   1xxx1 = SPLIT-Error --> splitInput()
