@@ -1,5 +1,5 @@
 [Unit]
-Description=RaspberryPi Weatherstation Webinterface - Frontendserver (React)
+Description=RaspberryPi weather station webinterface - Frontendserver (React)
 After=network.target
 
 [Service]
