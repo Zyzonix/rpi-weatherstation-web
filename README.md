@@ -38,6 +38,7 @@ $ cd rpi-weatherstation-web/
 ```
 Run the setup script as root:
 ##### Please notice, that all required commands are accessible through make.
+PLEASE NOTE: this part is not finished yet! --> no automated installation available
 ```
 $ sudo make install
 ```
@@ -79,4 +80,4 @@ Command | Description
 This software is part of a school project developed by Zyzonix. It's goal was the development of an executeable software, that can retrieve environmental data, write these datasets into databases (1st pt.) and display the stored data into graphs on a webserver (2nd pt.). 
 (This repository only contains the second part, the weather station software won't be published here within this repository, it can be found under Zyzonix/rpi-weatherstation)
 
-README-version: 0.1
+README-version: 0.2
