@@ -7,7 +7,7 @@
 # -
 # file      | src/WebCore.js
 # project   | rpi-weatherstation-web
-# project-v | 1.0.0 (beta)
+# project-v | 1.0.1 (beta)
 # 
 */
 
@@ -20,7 +20,7 @@ import humidityICO from './rsrc/humidity.png';
 
 /*
 INFORMATION:
-'<>{content}</>' == one HTML element 
+'<>{content}</>' == one single HTML element 
 
 The return within React.Component is only allowed to return 
 one single element and not several.
@@ -169,6 +169,7 @@ class WebHeader extends React.Component {
 // html datatype selection template
 function DataSelect({number}) {
     const valueNumber = "selectValue" + number;
+    
     return (
         <select className="selectmenu" id={valueNumber}>
             <option value="temperature">Temperature</option>
@@ -178,10 +179,12 @@ function DataSelect({number}) {
             <option value="pm100">PM10</option>
         </select>
     );
+
 }
 
 // html animation template for 3rd row
 function LoadingAnimation() {
+    
     return (
         <div className="loadingBase">
             <div className="loadingCore">
@@ -192,6 +195,7 @@ function LoadingAnimation() {
             </div>
         </div>
     );
+
 }
 
 // CHART:
@@ -230,6 +234,7 @@ function ChartHandler(dataRaw, value1, value2) {
     // adding data (value1) to array1
     for (var selectedValueKey1 in dataRaw[0].data.dataValue1) {
         var selectedValue1 = dataRaw[0].data.dataValue1[selectedValueKey1];
+        
         // pushing value to array (y axis)
         data1.push(selectedValue1);
         //console.log(dataRaw[0].data.dataValue1[selectedValue1]);
@@ -246,6 +251,7 @@ function ChartHandler(dataRaw, value1, value2) {
             highestValueHolder = selectedValue1;
         }
     }
+    
     // pasting lowest/highest value for y axis into var (value1)
     lowestYAxisValue1 = lowestValueHolder - chartSetting[value1][0];
     highestYAxisValue1 = highestValueHolder + chartSetting[value1][0];
@@ -259,6 +265,7 @@ function ChartHandler(dataRaw, value1, value2) {
 
     // handle data for value2 
     if (value1 !== value2) {
+        
         // adding data to array2 if value1 != value2
         // resetting array
         data2 = [];
@@ -302,6 +309,7 @@ function ChartHandler(dataRaw, value1, value2) {
         min: lowestYAxisValue2,
         max: highestYAxisValue2
     };
+
     // second Y axis data array
     var secondData = {
         name: dataSetting[value2][1],
@@ -310,6 +318,7 @@ function ChartHandler(dataRaw, value1, value2) {
 
     // retrieving status --> if not 10000 --> display error
     var status = dataRaw[0].status;
+    
     if (status === 10000) {
         // chart settings (style and data)
         var options = {
@@ -339,6 +348,7 @@ function ChartHandler(dataRaw, value1, value2) {
                 }
               ],
         }
+
         // customizing the chart if values are unequal, adding second y axis and it's data
         if (value1 !== value2) {
             options["yaxis"].push(secondYAxis);
@@ -376,6 +386,7 @@ function PrepareRequest(data) {
     for (var i in data) {
         prepath += data[i] + "_"; 
     }
+
     // removing last "-"
     var path = prepath.slice(0, -1);
     return path;
@@ -384,6 +395,7 @@ function PrepareRequest(data) {
 // requests available datarange via HTTP GET request
 function RequestDataRange() {
     let xmlhttpRange = new XMLHttpRequest();
+    
     // (!) runs synchronously
     xmlhttpRange.open("GET", "http://" + backend_IP + ":8000/datarange", false);
     xmlhttpRange.send();
@@ -410,6 +422,7 @@ function inputHandler() {
         if (!data[i]) {
             alertM += "- " + i + "\n";
         } else {
+            
             // checking if all given parameters are matching requirements
             var dataSplit = data[i].split("-");
             if (i.includes("Time")) {
@@ -429,10 +442,12 @@ function inputHandler() {
             }
         }
     }
+
     if (alertM !== "Something went wrong, please check these values:\n") {
         alert(alertM);
         return;
     }
+
     // checking if date are valid
     var sd = data["startDate"].replace("-","").replace("-","");
     var ed = data["endDate"].replace("-","").replace("-","");
@@ -452,6 +467,7 @@ function inputHandler() {
     } catch (err) {
         //  do nothing --> exception will be printed ou after next async request
     }
+    
     var reqValues = [data["firstValue"], data["secondValue"]];
     return [data, reqValues];
 }
@@ -465,6 +481,7 @@ class WebDisplay extends React.Component {
     // (dataRequested == unused)
     constructor(props) {
         super(props);
+        
         this.state = {
           isVisible: false,
           dataRequested: false
@@ -501,6 +518,7 @@ class WebDisplay extends React.Component {
     RequestData = (path, callback, error, reqValues) => {
         let xmlhttpData = new XMLHttpRequest();
         xmlhttpData.open("GET", "http://" + backend_IP + ":8000/request/" + path);
+        
         // (!) runs asynchronously
         xmlhttpData.onload = function() {
             console.log(getCurTime() + "request completed");
@@ -516,16 +534,19 @@ class WebDisplay extends React.Component {
     WSCore = () => {
         console.log(getCurTime() + "collecting and validating input");
         var inputOut = inputHandler();
+        
         if (!inputOut) {
             console.log(getCurTime() + "input invalid - returning");
             return false;
         }
+
         console.log(getCurTime() + "finished");
         console.log(getCurTime() + "preparing HTTP path");
         var requestedPath = PrepareRequest(inputOut[0]);
         console.log(getCurTime() + "finished");
         console.log(getCurTime() + "requesting data from backend");
         this.RequestData(requestedPath, this.ControlChartHandler, toggleChartDisplay, inputOut[1]);
+        
         return true;
     }
 
@@ -600,10 +621,14 @@ class WebDisplay extends React.Component {
                     </div>
                     <div className="genButton">
                         <div className="text" id="buttonField">
-                            <input id="ggraph" type="button" value="Generate graph" onClick={this.handleLoading} />
+                            <input id="ggraph" 
+                            type="button" 
+                            value="Generate graph" 
+                            onClick={this.handleLoading} />
                         </div>
                     </div>
                 </div>
+                
                 <div style={boxStyle}>
                     {chartPanel}
                 </div>
@@ -614,6 +639,7 @@ class WebDisplay extends React.Component {
     // unused
     componentDidUpdate() {
         let { dataRequested } = this.state;
+        
         if (dataRequested) {
             this.setState({dataRequested: false});
         }
@@ -622,7 +648,9 @@ class WebDisplay extends React.Component {
 
 // webpage blueprint --> component collector (implementation via JSX) (3 orange rows + background)
 class WebCore extends React.Component {
+    
     render() {
+        
         const pageStyle = {
             backgroundColor: "white",
             marginLeft: "15%",
@@ -631,6 +659,7 @@ class WebCore extends React.Component {
             padding: "0.5%",
             overflow: "hidden"
         }
+        
         return (
             // inserting all blocks to parent HTML 
             // forward to Github-profile
