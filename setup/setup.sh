@@ -7,7 +7,7 @@
 # -
 # file      | setup/setup.sh
 # project   | rpi-weatherstation-web
-# version   | 0.1.0
+# version   | 0.2.0
 # 
 echo
 echo
@@ -41,6 +41,8 @@ sudo cp $_cur_dir/setup/WS-web_frontendServer.service /lib/systemd/system/
 echo done $_cur_dir/setup/WS-web_frontendServer.service copied
 sudo cp $_cur_dir/setup/WS-web_backendServer.service /lib/systemd/system/
 echo done $_cur_dir/setup/WS-web_backendServer.service copied
+sudo cp $_cur_dir/setup/WS-web_storageSync.service /lib/systemd/system/
+echo done $_cur_dir/setup/WS-web_storageSync.service copied
 
 # shows status of system services
 echo
@@ -51,6 +53,8 @@ fe=$(sudo systemctl status WS-web_frontendServer.service)
 echo $fe
 be=$(sudo systemctl status WS-web_backendServer.service)
 echo $be
+se=$(sudo systemctl status WS-web_storageSync.service)
+echo $se
 
 # confirming setup
 echo
