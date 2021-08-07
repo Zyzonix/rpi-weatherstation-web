@@ -7,7 +7,7 @@
 # -
 # file      | setup/setup.sh
 # project   | rpi-weatherstation-web
-# version   | 0.2.0
+# version   | 0.3.0
 # 
 echo
 echo
@@ -28,8 +28,9 @@ echo
 echo -------------------
 echo installing packages
 echo -------------------
-pip install sqlite
 pip3 install fastapi
+pip3 install uvicorn
+pip3 install configparser
 
 # pasting service into correct directory
 echo
