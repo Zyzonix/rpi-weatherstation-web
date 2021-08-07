@@ -7,7 +7,7 @@
 # -
 # file      | Makefile
 # project   | rpi-weatherstation-web
-# version   | 0.1.0
+# version   | 0.2.0
 # 
 # rd. to help menu
 all: help
@@ -29,22 +29,24 @@ uninstall:
 	make disable-all
 	sudo rm /lib/systemd/system/WS-web_frontendServer.service
 	sudo rm /lib/systemd/system/WS-web_backendServer.service
+	sudo rm /lib/systemd/system/WS-web_storageSync.service
 	@echo ""
 	@echo "---------------------------------------------------------------------------"
 	@echo "uninstallation of rpi-weatherstation-web finished - removing last directory"
 	@echo "---------------------------------------------------------------------------"
 	@echo ""
-#sudo rm -rf $(CURDIR)
+	sudo rm -rf $(CURDIR)
 
 # general control
-start-all: start-backend start-frontend
+start-all: start-backend start-frontend start-sync
 
-stop-all: stop-backend start-frontend
+stop-all: stop-backend start-frontend stop-sync
 
-enable-all: enable-backend enable-frontend
+enable-all: enable-backend enable-frontend enable-sync
 
-disable-all: disable-backend disable-frontend
+disable-all: disable-backend disable-frontend disable-sync
 
+# -----------------------------------------------------------------
 # Crontrol backendServer
 #
 # starts backendserver manually (if disabled)
@@ -132,6 +134,45 @@ frontend-check:
 	@echo ""
 	sudo systemctl status WS-web_frontendServer.service
 
+# -----------------------------------------------------------------
+# Control storageSync 
+#
+# starts storageSync manually (if disabled)
+start-sync:
+	@echo "starting storageSync service"
+	@echo
+	sudo systemctl start WS-web_storageSync.service
+
+# stops storageSync.service
+stop-sync:	
+	@echo "stopping storageSync service"
+	@echo ""
+	sudo systemctl stop WS-web_storageSync.service
+
+# installs storageSync.service
+enable-sync:
+	@echo ""
+	@echo "installing storageSync service"
+	@echo ""
+	sudo systemctl enable WS-web_storageSync.service
+
+# uninstalls storageSync.service
+disable-sync:
+	@echo ""
+	@echo "uninstalling storageSync service"
+	@echo ""
+	sudo systemctl disable WS-web_storageSync.service
+
+sync-status: sync-check
+# checks the status of storageSync.service
+sync-check: 
+	@echo "checking storageSync status"
+	@echo ""
+	@echo "the following error is due to the command - don't worry"
+	@echo ""
+	sudo systemctl status WS-web_storageSync.service
+
+
 # Helpmenu
 # prints all commands with an explanation
 help:
@@ -156,10 +197,18 @@ help:
 	@echo "- sudo make frontend-check.........shows the status of the station system service"
 	@echo ""	
 	@echo "------------------------------------- [backend] -------------------------------------"
-	@echo "- sudo make start-backend..........starts the livedata service"
-	@echo "- sudo make stop-backend...........stops the livedata service"
-	@echo "- sudo make enable-backend.........installs the livedata service"	
-	@echo "- sudo make disable-backend........uninstalls the livedata service"
-	@echo "- sudo make backend-check..........shows the status of the livedata system service"
+	@echo "- sudo make start-backend..........starts the backend service"
+	@echo "- sudo make stop-backend...........stops the backend service"
+	@echo "- sudo make enable-backend.........installs the backend service"	
+	@echo "- sudo make disable-backend........uninstalls the backend service"
+	@echo "- sudo make backend-check..........shows the status of the backend system service"
+	@echo "-------------------------------------------------------------------------------------"
+	@echo ""	
+	@echo "----------------------------------- [storageSync] -----------------------------------"
+	@echo "- sudo make start-sync.............starts the sync service"
+	@echo "- sudo make stop-sync..............stops the sync service"
+	@echo "- sudo make enable-sync............installs the sync service"	
+	@echo "- sudo make disable-sync...........uninstalls the sync service"
+	@echo "- sudo make sync-check.............shows the status of the sync system service"
 	@echo "-------------------------------------------------------------------------------------"
 	@echo ""
