@@ -5,8 +5,8 @@
 [![HTML-Version](https://img.shields.io/badge/HTML-5-blue)]()
 [![Node-Version](https://img.shields.io/badge/Node-v14.17.2-blue)]()
 [![NPM-Version](https://img.shields.io/badge/NPM-6.14.13-blue)]()
-[![Last updated](https://img.shields.io/badge/Last%20updated-07/08/2021-orange)]()
-[![Development completed](https://img.shields.io/badge/Development%20completed-false-red)]() 
+[![Last updated](https://img.shields.io/badge/Last%20updated-08/08/2021-orange)]()
+[![Development completed](https://img.shields.io/badge/Development%20completed-true-green)]() 
 [![Tests passed](https://img.shields.io/badge/Tests%20passed-false-red)]()
 
 
@@ -76,8 +76,17 @@ Command | Description
 ``` $ sudo make enable-frontend ``` | Enables autostart at boot
 ``` $ sudo make disable-frontend ``` | Disables autostart at boot
 
+##### storageSync commands:
+Command | Description
+--- | ---
+``` $ sudo make start-sync ``` | Start the frontend-service (not required if the service is enabled)
+``` $ sudo make sync-check ``` / ``` $ sudo make sync-status ``` | Shows the status of the frontend-Server
+``` $ sudo make stop-sync ``` | Stops the frontend-service
+``` $ sudo make enable-sync ``` | Enables autostart at boot
+``` $ sudo make disable-sync ``` | Disables autostart at boot
+
 ### About the project
 This software is part of a school project developed by Zyzonix. It's goal was the development of an executeable software, that can retrieve environmental data, write these datasets into databases (1st pt.) and display the stored data into graphs on a webserver (2nd pt.). 
 (This repository only contains the second part, the weather station software won't be published here within this repository, it can be found under Zyzonix/rpi-weatherstation)
 
-README-version: 0.3
+README-version: 0.4
