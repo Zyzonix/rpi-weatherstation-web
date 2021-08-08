@@ -1,6 +1,7 @@
 # Webinterface for Zyzonix/rpi-weatherstation
 
 [![Version](https://img.shields.io/badge/Project%20version-0.9-orange)]() 
+[![OS-Type](https://img.shields.io/badge/OS%20Type-Linux-blue)]()
 [![Python-Version](https://img.shields.io/badge/Python-3.7.3-blue)]()
 [![HTML-Version](https://img.shields.io/badge/HTML-5-blue)]()
 [![Node-Version](https://img.shields.io/badge/Node-v14.17.2-blue)]()
@@ -89,4 +90,4 @@ Command | Description
 This software is part of a school project developed by Zyzonix. It's goal was the development of an executeable software, that can retrieve environmental data, write these datasets into databases (1st pt.) and display the stored data into graphs on a webserver (2nd pt.). 
 (This repository only contains the second part, the weather station software won't be published here within this repository, it can be found under Zyzonix/rpi-weatherstation)
 
-README-version: 0.5
+README-version: 0.6
