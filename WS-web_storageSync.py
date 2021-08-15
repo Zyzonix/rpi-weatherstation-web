@@ -8,7 +8,7 @@
 # -
 # file      | WS-web_storageSync.py
 # project   | rpi-weatherstation-web
-# version   | 0.2.0
+# version   | 0.3.0
 #
 
 import ftplib, threading, sys, os
@@ -71,9 +71,8 @@ class syncStorages():
         if not remoteFileList == localFileList:
             for file in remoteFileList:
                 if not file in localFileList:
-                    if file == "daily":
-                        break
-                    toSync.append(file)
+                    if not file == "daily":
+                        toSync.append(file)
         return toSync
 
     def getFTPContent(self, ftpConnection):
