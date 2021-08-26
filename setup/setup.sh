@@ -7,7 +7,7 @@
 # -
 # file      | setup/setup.sh
 # project   | rpi-weatherstation-web
-# version   | 0.3.0
+# version   | 0.4.0
 # 
 echo
 echo
@@ -31,6 +31,13 @@ echo -------------------
 pip3 install fastapi
 pip3 install uvicorn
 pip3 install configparser
+
+# installing serve-environment for final build
+echo
+echo --------------------
+echo installing npm-serve
+echo --------------------
+sudo npm install serve
 
 # pasting service into correct directory
 echo
