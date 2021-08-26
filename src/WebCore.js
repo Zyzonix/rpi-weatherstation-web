@@ -7,7 +7,7 @@
 # -
 # file      | src/WebCore.js
 # project   | rpi-weatherstation-web
-# project-v | 1.0.1 (beta)
+# project-v | 1.0.2 (beta)
 # 
 */
 
@@ -53,7 +53,7 @@ function Header() {
         <>
             <div className="headerRow">
                 <div className="text">
-                    Raspberry Pi Weatherstation - Webinterface
+                    Raspberry Pi weather station - Webinterface
                 </div>
             </div>
         </>
@@ -128,16 +128,16 @@ class WebHeader extends React.Component {
         }
     }
 
-    // requests livedata from weatherstation
+    // requests livedata from weather station
     RequestLiveValues = (callback) => {
         let xmlhttpCurrent = new XMLHttpRequest();
         xmlhttpCurrent.open("GET", "http://" + rpi_weatherstation_IP + ":8001/");
         xmlhttpCurrent.onload = function() {
             callback(JSON.parse(xmlhttpCurrent.response));
-            console.log(getCurTime() + "inserted livedata from weatherstation");
+            console.log(getCurTime() + "inserted livedata from weather station");
         };
         xmlhttpCurrent.onerror = function() {
-            console.log(getCurTime() + "weatherstation unreachable");
+            console.log(getCurTime() + "weather station unreachable");
         };
         xmlhttpCurrent.send();
     }
@@ -490,7 +490,7 @@ class WebDisplay extends React.Component {
 
     // content toggler for 3rd row
     handleLoading = async () => {
-        console.log("\n\n" + getCurTime() + "event triggered | initialized datavisualization")
+        console.log("\n\n" + getCurTime() + "event triggered | initialized data visualization")
         // starting core function
         var success = this.WSCore();
         // toggling animation (content of) in 3rd component
