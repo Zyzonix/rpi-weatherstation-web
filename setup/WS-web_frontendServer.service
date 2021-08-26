@@ -1,9 +1,9 @@
 [Unit]
-Description=RaspberryPi weather station webinterface - Frontendserver (React)
+Description=RaspberryPi weather station Webinterface - Frontendserver
 After=network.target
 
 [Service]
-ExecStart=
+ExecStart=/usr/bin/serve -s /home/pi/rpi-weatherstation-web/build
 WorkingDirectory=/home/pi/rpi-weatherstation-web/
 StandardOutput=inherit
 StandardError=inherit
